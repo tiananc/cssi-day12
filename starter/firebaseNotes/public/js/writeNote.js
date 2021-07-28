@@ -14,7 +14,21 @@ window.onload = (event) => {
 
 const handleNoteSubmit = () => {
     console.log("note submission function called");
-    // 1. Capture the form data
-    // 2. Format the data and write it to our database
-    // 3. Clear the form so that we can write a new note
+   const noteTitle = document.querySelector("#noteTitle");
+   const noteText = document.querySelector("#noteText");
+    
+   let theTitle = noteTitle.value;
+   let theText = noteText.value;
+   
+    const note = {
+        title: noteTitle.value,
+        text: noteText.value
+    };
+    
+    
+    const dbRef = firebase.database().ref(`users/${googleUser.uid}`);
+    dbRef.push(note);
+
+    noteTitle.value = "";
+    noteText.value = "";
 }
