@@ -1,5 +1,6 @@
 let googleUser;
-
+const colors = ["lightRed", "lightOrange","yellow","lightGreen","lightBlue","lightPink"];
+let randColor = Math.floor((Math.random() * colors.length));
 window.onload = (event) => {
   // Use this to retain user state between html pages.
   firebase.auth().onAuthStateChanged(function(user) {
@@ -27,16 +28,17 @@ const renderData = (data) => {
       destination.innerHTML = "";
       for (let key in data) {
         const note = data[key];
+        randColor = Math.floor((Math.random() * 5) + 1);
         destination.innerHTML += createCard(note);
 }
 
 };
-
+//added style within html 
 const createCard = (note) => {
     return `<div class="column is-one-quarter"> 
-               <div class = "card">
+               <div class = "card" style = "background: ${colors[randColor]}">
                <div class = card-header><p>${note.title}</p></div>
-               <div class = "card-content">${note.text}</div>
+               <div class = "card-content">${note.text} - ${googleUser.val}</div>
             </div>`;
 
 }
